@@ -10,26 +10,24 @@ const app = express();
 
 // Lista de orígenes permitidos
 const allowedOrigins = [
-  "http://localhost:5174",  // Para desarrollo
-  "isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Para producción
+  "isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Para producción, 
+  'http://localhost:3000', // para local
 ];
 
-// Configuración de CORS
 const corsOptions = {
-  origin: (origin, callback) => {
-    // Permitir solicitudes sin "origin" (por ejemplo, Postman)
-    if (!origin || allowedOrigins.includes(origin)) {
+  origin: function (origin, callback) {
+    if (allowedOrigins.includes(origin) || !origin) { // !origen es para solicitudes sin origen 
       callback(null, true);
     } else {
-      callback(new Error("Origen no permitido por CORS"));
+      callback(new Error('Origen no permitido por CORS'));
     }
   },
-  credentials: true,  // Permitir cookies y encabezados de autorización
-  methods: ["GET", "POST", "PUT", "DELETE"],
-  allowedHeaders: ["Content-Type", "Authorization"],
+  methods: ['GET', 'POST', 'OPTIONS'],
+  allowedHeaders: ['Content-Type'],
+  credentials: true, // habilita cookies o sesiones
 };
 
-app.options("*",cors(corsOptions));
+app.use(cors(corsOptions)); // Usar CORS con las opciones definidas
 
 app.use(morgan("dev"));
 // Middleware
