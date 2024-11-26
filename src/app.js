@@ -8,13 +8,28 @@ dotenv.config();
 
 const app = express();
 
-// Configuración de CORS (permitir cualquier origen)
+// Lista de orígenes permitidos
+const allowedOrigins = [
+  "http://localhost:5174",  // Para desarrollo
+  "https://ises2024back.onrender.com",  // Para producción
+];
+
+// Configuración de CORS
 const corsOptions = {
-  origin: "https://ises2024back.onrender.com",  // El origen específico que quieres a permitir
-  credentials: true,  // Permitir solicitudes con credenciales
+  origin: (origin, callback) => {
+    // Permitir solicitudes sin "origin" (por ejemplo, Postman)
+    if (!origin || allowedOrigins.includes(origin)) {
+      callback(null, true);
+    } else {
+      callback(new Error("Origen no permitido por CORS"));
+    }
+  },
+  credentials: true,  // Permitir cookies y encabezados de autorización
+  methods: ["GET", "POST", "PUT", "DELETE"],
+  allowedHeaders: ["Content-Type", "Authorization"],
 };
 
-app.use(cors(corsOptions));// Esto permite todas las solicitudes de cualquier origen
+app.use(cors(corsOptions));
 
 app.use(morgan("dev"));
 // Middleware
