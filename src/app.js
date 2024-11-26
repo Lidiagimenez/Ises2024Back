@@ -24,14 +24,14 @@ const corsOptions = {
       callback(new Error('Origen no permitido por CORS'));
     }
   },
-  methods: ['GET', 'POST', 'OPTIONS'],
+  methods: ['GET', 'POST','PUT', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
 };
 app.use(cors(corsOptions)); // Usar CORS con las opciones definidas
 
 app.use(morgan("dev"));
-// Middleware
+
 app.use(express.json());
 
 // Rutas
