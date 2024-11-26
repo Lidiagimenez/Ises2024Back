@@ -15,16 +15,10 @@ const allowedOrigins = [
 ];
 
 const corsOptions = {
-  origin: function (origin, callback) {
-    if (allowedOrigins.includes(origin) || !origin) { // !origen es para solicitudes sin origen 
-      callback(null, true);
-    } else {
-      callback(new Error('Origen no permitido por CORS'));
-    }
-  },
+  origin: '*', // Permitir cualquier origen
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
-  credentials: true, // habilita cookies o sesiones
+  credentials: true,
 };
 
 app.use(cors(corsOptions)); // Usar CORS con las opciones definidas
