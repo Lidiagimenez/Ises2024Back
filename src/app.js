@@ -1,31 +1,26 @@
-const express = require('express');
-const dotenv = require('dotenv');
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const routerApi = require("./routes/index");
+const morgan = require("morgan");
+// Cargar variables de entorno
 dotenv.config();
-const cors = require('cors');
 
-dotenv.config();
 const app = express();
 
-const routerApi = require('./routes/index');
-const { config } = require('dotenv');
+// Configuración de CORS (permitir cualquier origen)
+app.use(cors());  // Esto permite todas las solicitudes de cualquier origen
 
-app.use(cors());
+app.use(morgan("dev"));
+// Middleware
 app.use(express.json());
 
-var whitelist = ['http://localhost:5173']
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (whitelist.indexOf(origin) !== -1) {
-      callback(null, true)
-    } else {
-      callback(new Error('Not allowed by CORS'))
-    }
-  }
-}
-app.get('/', (req,res) => {
-    res.send('Backend con nodejs ');
+// Rutas
+app.get("/", (req, res) => {
+  res.send("Backend con Node.js");
 });
 
+// Usar las rutas del archivo index.js
 routerApi(app);
 
 module.exports = app;

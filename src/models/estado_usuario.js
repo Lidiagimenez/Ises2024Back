@@ -1,25 +1,22 @@
- const { DataTypes } = require("sequelize");
- const sequelize = require("../database/database");
+const { DataTypes } = require("sequelize");
+const sequelize = require("../database/database");
 
+// Definición del modelo estado_usuario
+const estadoUser = sequelize.define(
+  "estado_usuario",
+  {
+    id_estado_usuario: {
+      type: DataTypes.INTEGER, // Usar solo INTEGER sin longitud
+      autoIncrement: true,
+      primaryKey: true,
+    },
+    detalle: {
+      type: DataTypes.STRING, // Usar STRING sin longitud especificada
+    },
+  },
+  {
+    timestamps: false, // No activar campos de timestamps (createdAt, updatedAt)
+  }
+);
 
-// //estado usuario
- const estadoUser = sequelize.define(
-   "estado_usuario",
-//    se cambia estado_usuarios por estado_usuario
-   {
-     id_estado_usuario: {
-         type: DataTypes.INTEGER(11),
-         autoIncrement: true,
-         primaryKey: true
-    
-     },
-     detalle: {
-         type: DataTypes.STRING(30),     
-     },
-   },
-   {
-     timestamps: false,
-   }
- );
-
- module.exports = estadoUser;
+module.exports = estadoUser;

@@ -3,7 +3,7 @@ const User = require("../models/usuarios.model");
 const estadoUser = require("../models/estado_usuario");
 
 try {
-  // un usuario tiene muchos tipos de usuario
+  // Relación: un tipo de usuario tiene muchos usuarios
   tipoUser.hasMany(User, {
     foreignKey: "id_tipo_usuario",
   });
@@ -11,17 +11,18 @@ try {
     foreignKey: "id_tipo_usuario",
   });
 
-  //un usuario puede tener un estado de usuario
+  // Relación: un usuario tiene un estado de usuario
   estadoUser.hasOne(User, {
     foreignKey: "id_estado_usuario",
   });
   User.belongsTo(estadoUser, {
     foreignKey: "id_estado_usuario",
   });
-  
 
-  console.log("Estoy en relaciones");
-} catch (error) {}
+  console.log("Relaciones establecidas correctamente");
+} catch (error) {
+  console.error("Error al establecer relaciones:", error);
+}
 
 module.exports = {
   tipoUser,

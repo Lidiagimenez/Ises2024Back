@@ -3,37 +3,36 @@ const sequelize = require("../database/database");
 
 const Materias = sequelize.define(
   "materias",
-     {
-    id_materia:{
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: DataTypes.INTEGER
+  {
+    id_materia: {
+      allowNull: false,
+      autoIncrement: true,
+      primaryKey: true,
+      type: DataTypes.INTEGER, // Solo INTEGER, sin longitud
     },
     nombre: {
-        allowNull: false,
-        type: DataTypes.STRING,
-        field:'nombre'
+      allowNull: false,
+      type: DataTypes.STRING, // Sin longitud especificada
+      field: 'nombre',
     },
     id_tipo_materia: {
       allowNull: false,
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER, // Solo INTEGER, sin longitud
       field: "id_tipo_materia",
     },
     id_estado_materia: {
       allowNull: false,
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER, // Solo INTEGER, sin longitud
       field: "id_estado_materia",
     },
     alta_baja: {
       allowNull: false,
-      type: DataTypes.INTEGER(11),
+      type: DataTypes.INTEGER, // Solo INTEGER, sin longitud
       field: "alta_baja",
     },
-
   },
   {
-    timestamps: false, // para que se pueda conectar a la bd seteamos en false, lo correcto es que lo tenga activado
+    timestamps: false, // Si no necesitas las columnas de timestamps (createdAt, updatedAt)
   }
 );
 
