@@ -10,8 +10,8 @@ const app = express();
 
 // Lista de orígenes permitidos
 const allowedOrigins = [
-  "isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Para producción, 
-  'http://localhost:3000', // para local
+  "https://isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Producción
+  "http://localhost:3000",  // Desarrollo local
 ];
 
 const corsOptions = {
