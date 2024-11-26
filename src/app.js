@@ -11,7 +11,7 @@ const app = express();
 // Lista de orígenes permitidos
 const allowedOrigins = [
   "http://localhost:5174",  // Para desarrollo
-  "https://ises2024back.onrender.com",  // Para producción
+  "isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Para producción
 ];
 
 // Configuración de CORS
