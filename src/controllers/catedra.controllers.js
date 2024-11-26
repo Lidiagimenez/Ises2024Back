@@ -1,4 +1,4 @@
-const Catedras = require('../models/Catedras.js'); // Importamos el modelo
+const Catedras = require('../models/Catedras'); // Importamos el modelo
 
 // Controlador para obtener todas las cátedras
 const getCatedras = async (req, res) => {
