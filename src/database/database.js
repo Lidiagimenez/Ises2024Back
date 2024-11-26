@@ -11,7 +11,13 @@ const sequelize = new Sequelize(
     {
       host: config.dbHost,
       port:config.dbPort,
-      dialect: 'postgres' 
+      dialect: 'postgres', 
+      dialectOptions: {
+        ssl: {
+          require: true,
+          rejectUnauthorized: false,
+        },
+      },
     }
 );
 
@@ -26,3 +32,6 @@ console.error('error al conectar a la base de datos',error);
 // setupModels(sequelize);
 
 module.exports = sequelize;
+
+
+
