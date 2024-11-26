@@ -10,17 +10,24 @@ const app = express();
 
 // Lista de orígenes permitidos
 const allowedOrigins = [
-  "https://isesgestion2024-git-main-lidiagimenezs-projects.vercel.app",  // Producción
+  
+  "https://isesgestion2024.vercel.app",  // Producción
   "http://localhost:3000",  // Desarrollo local
 ];
 
 const corsOptions = {
-  origin: '*', // Permitir cualquier origen
+  origin: function (origin, callback) {
+    console.log("Origen de la solicitud:", origin);  // Verifica el valor de origin
+    if (allowedOrigins.includes(origin) || !origin) {
+      callback(null, true);
+    } else {
+      callback(new Error('Origen no permitido por CORS'));
+    }
+  },
   methods: ['GET', 'POST', 'OPTIONS'],
   allowedHeaders: ['Content-Type'],
   credentials: true,
 };
-
 app.use(cors(corsOptions)); // Usar CORS con las opciones definidas
 
 app.use(morgan("dev"));
