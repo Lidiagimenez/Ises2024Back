@@ -1,30 +1,25 @@
 const sequelize = require("./database/database");
 const app = require("./app.js");
-const User = require("./models/usuarios.model");
-const tipoUser = require("./models/tipo_usuario");
-const estadoUser = require("./models/estado_usuario");
 const config = require("./config/config");
-const colors = require("colors");
 
-
-const port = config.port ;
-
-
+// Obtener el puerto de la configuración
+const port = config.port;
 
 async function main() {
   try {
+    // Autenticar la conexión a la base de datos
     await sequelize.authenticate();
-    require("./database/relaciones"); // si quitamos esta linea las relaciones no se crean automaticamente
-    console.log("Authenticated successfully");
-    console.log(User === sequelize.models.usuarios); // vemos si nuestro modelo coincide con el de la base de datos
-    console.log(tipoUser === sequelize.models.tipo_usuario);
-    console.log(estadoUser === sequelize.models.estado_usuario);
-    app.listen(port);
-    console.log("App listening on port".bgGreen.red, port);
+
+    // Cargar relaciones
+    require("./database/relaciones");
+
+    // Iniciar la aplicación
+    app.listen(port, () => {
+      console.log(`App funcionando en http://localhost:${port}`);
+    });
   } catch (error) {
-    console.error("Error al conectarse a la base de datos: ", error);
+    console.error("Error al conectarse a la base de datos:", error);
   }
 }
 
 main();
-

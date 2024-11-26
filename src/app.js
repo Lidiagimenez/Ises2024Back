@@ -1,33 +1,31 @@
-const express = require('express');
-const dotenv = require('dotenv');
+const express = require("express");
+const dotenv = require("dotenv");
+const cors = require("cors");
+const routerApi = require("./routes/index");
+const morgan = require("morgan");
+// Cargar variables de entorno
 dotenv.config();
-const cors = require('cors');
 
 const app = express();
-const routerApi = require('./routes/index');
 
-// Lista blanca de dominios permitidos
-var whitelist = ['http://localhost:5173', 'isesgestion2024.vercel.app'];
-
-var corsOptions = {
-  origin: function (origin, callback) {
-    if (!origin || whitelist.indexOf(origin) !== -1) {
-      callback(null, true);
-    } else {
-      callback(new Error('Not allowed by CORS'));
-    }
-  },
-  credentials: true, // Permite enviar cookies o cabeceras de autenticación
+// Configuración de CORS (permitir cualquier origen)
+const corsOptions = {
+  origin: "https://ises2024back.onrender.com",  // El origen específico que quieres a permitir
+  credentials: true,  // Permitir solicitudes con credenciales
 };
 
-app.use(cors(corsOptions));
+app.use(cors(corsOptions));// Esto permite todas las solicitudes de cualquier origen
+
+app.use(morgan("dev"));
+// Middleware
 app.use(express.json());
 
-// Rutas principales
-app.get('/', (req, res) => {
-    res.send('Backend con Node.js');
+// Rutas
+app.get("/", (req, res) => {
+  res.send("Backend con Node.js");
 });
 
+// Usar las rutas del archivo index.js
 routerApi(app);
 
 module.exports = app;
