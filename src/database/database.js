@@ -4,6 +4,7 @@ const config = require('../config/config');
 
 // Crear la instancia de Sequelize
 const sequelize = new Sequelize(
+<<<<<<< HEAD
   config.dbNAME, // nombre de la base de datos
   config.dbUser, // usuario de la base de datos
   config.dbPassword, // contraseña de la base de datos
@@ -19,6 +20,17 @@ const sequelize = new Sequelize(
     },
     logging: false, // Desactivar logs de Sequelize
   }
+=======
+  
+  config.dbNAME, // name database
+  config.dbUser, // user database
+  config.dbPassword , // password database
+    {
+      host: config.dbHost,
+      port:config.dbPort,
+      dialect: 'postgres', 
+    }
+>>>>>>> d2f981f (nueva conexion)
 );
 
 // Sincronizar la base de datos
